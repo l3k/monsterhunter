@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Matador de Monstro</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s6">
+                                <h4 class="center-align">Jogador</h4>
+                                <div style="display: flex;">
+                                    <div class="progress" :class="colorPlayerLife1" style="height: 30px">
+                                        <div class="determinate" :class="colorPlayerLife2" style="height: 30px" :style="{width: playerLife + '%'}"></div>
+                                    </div>
+                                    <p style="margin-top: 10px;margin-left: 10px;font-weight: 900">{{ playerLife }}%</p>
+                                </div>
+                            </div>
+                            <div class="col s6">
+                                <h4 class="center-align">Monstro</h4>
+                                <div style="display: flex;">
+                                    <div class="progress" :class="colorMonsterLife1" style="height: 30px">
+                                        <div class="determinate" :class="colorMonsterLife2" style="height: 30px" :style="{width: monsterLife + '%'}"></div>
+                                    </div>
+                                    <p style="margin-top: 10px;margin-left: 10px;font-weight: 900">{{ monsterLife }}%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="hasResult" class="card">
+                    <div class="card-content">
+                        <p v-if="this.monsterLife == 0" class="center-align blue-text text-darken-4" style="font-size: 20px;font-weight: 900">Você ganhou!! :)</p>
+                        <p v-if="this.playerLife == 0" class="center-align orange-text text-darken-4" style="font-size: 20px;font-weight: 900">Você perdeu!! :(</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content center-align">
+                        <template v-if="running">
+                            <a @click="attack(false)" class="waves-effect waves-light btn red darken-1">Ataque</a>
+                            <a @click="attack(true)" class="waves-effect waves-light btn orange darken-1">Ataque Especial</a>
+                            <a @click="healAndHurt" class="waves-effect waves-light btn teal darken-1">Curar</a>
+                            <a @click="running = false" class="waves-effect waves-light btn grey darken-1">Desistir</a>
+                        </template>
+                        <a v-else @click="startGame" class="waves-effect waves-light btn blue darken-1">Iniciar jogo</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>
