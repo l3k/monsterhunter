@@ -63,6 +63,14 @@
                     </div>
                 </div>
 
+                <div v-if="logs.length" class="card">
+                    <div class="card-content">
+                        <div v-for="(log, index) in logs" :key="index" class="card-panel" :class="log.cls == 'monster' ? 'deep-orange darken-1' : 'light-green darken-2'">
+                            <h6 class="white-text center-align">{{ log.text }}</h6>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
 
